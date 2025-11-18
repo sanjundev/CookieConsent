@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Consent Example</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin: 10px 5px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            margin-top: 0;
+            color: #555;
+        }
+        pre {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>react-cookie-consent Demo</h1>
+    
+    <div class="demo-section">
+        <h2>Default Banner</h2>
+        <p>Show the banner with default settings:</p>
+        <button onclick="showDefault()">Show Default Banner</button>
+        <pre>MyCookie.show();</pre>
+    </div>
+
+    <div class="demo-section">
+        <h2>Custom Banner (Top Position)</h2>
+        <p>Show the banner at the top with a custom title and colors:</p>
+        <button onclick="showCustomTop()">Show Top Banner</button>
+        <pre>
+MyCookie.show({
+  title: 'We use cookies',
+  position: 'top',
+  background: '#2c3e50',
+  textcolor: '#ecf0f1',
+  buttonColor: '#e74c3c',
+  buttonText: 'I Agree',
+  closeText: 'Decline'
+});</pre>
+    </div>
+
+    <div class="demo-section">
+        <h2>Custom Banner with Callbacks</h2>
+        <p>Show banner with event callbacks:</p>
+        <button onclick="showWithCallbacks()">Show Banner with Callbacks</button>
+        <pre>
+MyCookie.show({
+  title: 'Cookie Policy',
+  position: 'bottom',
+  background: '#34495e',
+  buttonColor: '#27ae60',
+  onAccept: () => alert('Cookies accepted!'),
+  onClose: () => alert('Banner closed!')
+});</pre>
+    </div>
+
+    <div class="demo-section">
+        <h2>Manual Hide</h2>
+        <p>Manually hide the currently displayed banner:</p>
+        <button onclick="hideBanner()">Hide Banner</button>
+        <pre>MyCookie.hide();</pre>
+    </div>
+
+    <script type="module">
+        // Import the library
+        import MyCookie from '../dist/index.esm.js';
+        
+        // Make MyCookie available globally for onclick handlers
+        window.MyCookie = MyCookie;
+        
+        window.showDefault = function() {
+            MyCookie.show();
+        };
+        
+        window.showCustomTop = function() {
+            MyCookie.show({
+                title: 'We use cookies',
+                position: 'top',
+                background: '#2c3e50',
+                textcolor: '#ecf0f1',
+                buttonColor: '#e74c3c',
+                buttonText: 'I Agree',
+                closeText: 'Decline'
+            });
+        };
+        
+        window.showWithCallbacks = function() {
+            MyCookie.show({
+                title: 'Cookie Policy',
+                position: 'bottom',
+                background: '#34495e',
+                textcolor: '#ffffff',
+                buttonColor: '#27ae60',
+                buttonText: 'Accept',
+                closeText: 'Decline',
+                onAccept: () => {
+                    alert('Cookies accepted! You can now proceed.');
+                },
+                onClose: () => {
+                    alert('Banner closed without accepting cookies.');
+                }
+            });
+        };
+        
+        window.hideBanner = function() {
+            MyCookie.hide();
+        };
+    </script>
+</body>
+</html>
