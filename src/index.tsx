@@ -7,10 +7,11 @@ class MyCookieClass {
   private container: HTMLDivElement | null = null;
   private root: ReactDOM.Root | null = null;
   private readonly defaultStorageKey = 'cookie-consent-accepted';
+  private readonly consentValue = 'true';
 
   private hasConsent(storageKey: string): boolean {
     try {
-      return localStorage.getItem(storageKey) === 'true';
+      return localStorage.getItem(storageKey) === this.consentValue;
     } catch (error) {
       // localStorage might not be available (e.g., in private browsing mode)
       return false;
@@ -19,7 +20,7 @@ class MyCookieClass {
 
   private saveConsent(storageKey: string): void {
     try {
-      localStorage.setItem(storageKey, 'true');
+      localStorage.setItem(storageKey, this.consentValue);
     } catch (error) {
       // Silently fail if localStorage is not available
       console.warn('Unable to save cookie consent to localStorage:', error);
