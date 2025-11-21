@@ -23,12 +23,12 @@ class MyCookieClass {
       localStorage.setItem(storageKey, this.consentValue);
     } catch (error) {
       // Silently fail if localStorage is not available
-      console.warn('Unable to save cookie consent to localStorage:', error);
+      console.warn('Unable to save cookie consent to localStorage');
     }
   }
 
   show(options: CookieConsentOptions = {}): void {
-    const storageKey = options.storageKey || this.defaultStorageKey;
+    const storageKey = (options.storageKey && options.storageKey.trim()) || this.defaultStorageKey;
 
     // Check if consent was already given
     if (this.hasConsent(storageKey)) {
@@ -84,11 +84,11 @@ class MyCookieClass {
   }
 
   reset(storageKey?: string): void {
-    const key = storageKey || this.defaultStorageKey;
+    const key = (storageKey && storageKey.trim()) || this.defaultStorageKey;
     try {
       localStorage.removeItem(key);
     } catch (error) {
-      console.warn('Unable to reset cookie consent in localStorage:', error);
+      console.warn('Unable to reset cookie consent in localStorage');
     }
   }
 }
