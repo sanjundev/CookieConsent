@@ -41,10 +41,26 @@ function App() {
     MyCookie.hide();
   };
 
+  const resetConsent = () => {
+    MyCookie.reset();
+    alert('Cookie consent has been reset! You can now show the banner again.');
+  };
+
   return (
     <div>
       <h1>react-cookie-consent Demo</h1>
       
+      <div className="demo-section" style={{ backgroundColor: '#fffbea', border: '2px solid #f59e0b' }}>
+        <h2>🆕 Persistent Consent</h2>
+        <p>
+          <strong>New Feature:</strong> Once you accept the cookie consent, it will be saved to localStorage 
+          and the banner won't show again, even after page refresh! Try accepting and then refreshing the page 
+          or clicking the buttons below again.
+        </p>
+        <button onClick={resetConsent} style={{ backgroundColor: '#f59e0b' }}>Reset Consent State</button>
+        <pre>MyCookie.reset();</pre>
+      </div>
+
       <div className="demo-section">
         <h2>Default Banner</h2>
         <p>Show the banner with default settings:</p>

@@ -1,6 +1,15 @@
 # react-cookie-consent
 
-A React component library for displaying cookie consent banners with customizable options.
+A React component library for displaying cookie consent banners with customizable options and **automatic persistence**.
+
+## Features
+
+- 🎨 Fully customizable appearance
+- 💾 **Automatic consent persistence** - Once accepted, the banner won't show again
+- 🔄 Built-in reset functionality
+- 📱 Responsive design
+- ⚡ Easy to integrate
+- 🎯 TypeScript support
 
 ## Installation
 
@@ -18,7 +27,7 @@ npm install react-cookie-consent
 
 ## Usage
 
-The library exports a default `MyCookie` object with a `show()` method that displays a cookie consent banner injected into the DOM using a React portal.
+The library exports a default `MyCookie` object with a `show()` method that displays a cookie consent banner injected into the DOM using a React portal. **When a user accepts the cookies, their choice is automatically saved to localStorage, preventing the banner from showing again on subsequent visits.**
 
 ### Basic Usage
 
@@ -60,11 +69,23 @@ import MyCookie from 'react-cookie-consent';
 MyCookie.hide();
 ```
 
+### Resetting Consent
+
+```javascript
+import MyCookie from 'react-cookie-consent';
+
+// Clear the saved consent state
+MyCookie.reset();
+
+// Now the banner will show again
+MyCookie.show();
+```
+
 ## API
 
 ### MyCookie.show(options)
 
-Displays the cookie consent banner with optional customization.
+Displays the cookie consent banner with optional customization. **The banner will automatically be suppressed if the user has already accepted cookies** (stored in localStorage).
 
 #### Options
 
@@ -79,10 +100,18 @@ Displays the cookie consent banner with optional customization.
 | `closeText` | string | `'Close'` | Text for the close button |
 | `onAccept` | function | `undefined` | Callback function when accept button is clicked |
 | `onClose` | function | `undefined` | Callback function when close button is clicked |
+| `storageKey` | string | `'cookie-consent-accepted'` | Custom localStorage key for storing consent state |
 
 ### MyCookie.hide()
 
 Removes the cookie consent banner from the DOM.
+
+### MyCookie.reset(storageKey?)
+
+Clears the saved consent state from localStorage, allowing the banner to be displayed again.
+
+**Parameters:**
+- `storageKey` (optional): The localStorage key to clear. If not provided, uses the default `'cookie-consent-accepted'`.
 
 ## Advanced Usage
 

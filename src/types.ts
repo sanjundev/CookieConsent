@@ -10,6 +10,7 @@ export interface CookieConsentOptions {
   closeText?: string;
   onAccept?: () => void;
   onClose?: () => void;
+  storageKey?: string;
 }
 
 export interface CookieConsentProps extends CookieConsentOptions {
