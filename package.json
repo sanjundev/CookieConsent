@@ -1,6 +1,6 @@
 {
   "name": "react-web-cookie-consent-simple",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A React component library for cookie consent banners",
   "type": "module",
   "main": "dist/index.js",
